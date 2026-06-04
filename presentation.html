@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stress Level Predictor — Presentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/night.css">
+    <style>
+        .reveal {
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .reveal h1 {
+            font-size: 1.4em;
+            color: #f39c12;
+            margin-bottom: 8px;
+        }
+        
+        .reveal h2 {
+            font-size: 1.1em;
+            color: #f39c12;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .reveal h3 {
+            font-size: 0.85em;
+            color: #3498db;
+            margin: 4px 0;
+        }
+        
+        .reveal p,
+        .reveal li {
+            font-size: 0.6em;
+            line-height: 1.4;
+            margin: 3px 0;
+        }
+        
+        .reveal ul {
+            margin: 4px 0;
+        }
+        
+        .reveal table {
+            font-size: 0.58em;
+            width: 100%;
+        }
+        
+        .reveal table th {
+            background: #f39c12;
+            color: #000;
+            padding: 4px 6px;
+        }
+        
+        .reveal table td {
+            padding: 4px 6px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .reveal table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #f39c12;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.5em;
+            font-weight: bold;
+            margin: 2px;
+        }
+        
+        .tag-blue {
+            background: #3498db;
+            color: #fff;
+        }
+        
+        .tag-green {
+            background: #2ecc71;
+            color: #000;
+        }
+        
+        .tag-red {
+            background: #e74c3c;
+            color: #fff;
+        }
+        
+        .box {
+            background: rgba(255, 255, 255, 0.07);
+            border-left: 3px solid #f39c12;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+        
+        .box-blue {
+            border-left-color: #3498db;
+        }
+        
+        .box-green {
+            border-left-color: #2ecc71;
+        }
+        
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .grid3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .metric-big {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #f39c12;
+        }
+        
+        .metric-label {
+            font-size: 0.55em;
+            color: #aaa;
+        }
+        
+        .arrow {
+            color: #f39c12;
+            font-size: 1.2em;
+        }
+        
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 0.6em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 1: TITLE                                          -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h1>🧠 Stress Level Predictor</h1>
+                <h3>From Daily Lifestyle Habits to Explainable AI</h3>
+                <br>
+                <div class="grid3">
+                    <div class="box">
+                        <div style="color:#f39c12;font-size:1.4em">3,000</div>
+                        <div class="metric-label">records</div>
+                    </div>
+                    <div class="box">
+                        <div style="color:#f39c12;font-size:1.4em">12</div>
+                        <div class="metric-label">features</div>
+                    </div>
+                    <div class="box">
+                        <div style="color:#f39c12;font-size:1.4em">3</div>
+                        <div class="metric-label">stress classes</div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag tag-blue">Optuna</span>
+                    <span class="tag tag-blue">MLflow</span>
+                    <span class="tag tag-green">DVC</span>
+                    <span class="tag tag-green">FastAPI</span>
+                    <span class="tag tag-red">SHAP</span>
+                </div>
+                <br>
+                <p class="subtitle">End-to-End ML Pipeline · GitHub: Dishantpaudel/burnout_predictor</p>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 2: PROBLEM                                        -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Why This Problem?</h2>
+                <div class="grid2" style="margin-top:10px">
+                    <div class="box">
+                        <h3>The Problem</h3>
+                        <p>Stress is a leading cause of burnout and mental health issues worldwide. Most people don't realise they're heading toward High stress until it's too late.</p>
+                    </div>
+                    <div class="box box-blue">
+                        <h3>The Solution</h3>
+                        <p>Predict stress level from <strong>daily habits</strong> — sleep, work hours, screen time, exercise — before it becomes serious.</p>
+                    </div>
+                    <div class="box box-green">
+                        <h3>Target: Stress Level</h3>
+                        <p><strong>Low / Moderate / High</strong></p>
+                        <p style="color:#aaa;font-size:0.55em">Originally planned Mental Health Condition (5 classes) but EDA showed ~20% F1 = random. Stress Level has direct causal link to lifestyle.</p>
+                    </div>
+                    <div class="box">
+                        <h3>Real-World Value</h3>
+                        <ul>
+                            <li>HR tools for employee wellness</li>
+                            <li>Personal health apps</li>
+                            <li>Early intervention systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 3: DATA & EDA                                     -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>The Data & EDA Findings</h2>
+                <div class="grid2">
+                    <div>
+                        <h3>Dataset</h3>
+                        <table>
+                            <tr>
+                                <th>Column</th>
+                                <th>Type</th>
+                            </tr>
+                            <tr>
+                                <td>Age, Sleep Hours</td>
+                                <td>Numeric</td>
+                            </tr>
+                            <tr>
+                                <td>Work Hours/Week</td>
+                                <td>Numeric</td>
+                            </tr>
+                            <tr>
+                                <td>Screen Time/Day</td>
+                                <td>Numeric</td>
+                            </tr>
+                            <tr>
+                                <td>Happiness Score</td>
+                                <td>Numeric</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Level</td>
+                                <td>Ordinal</td>
+                            </tr>
+                            <tr>
+                                <td>Gender, Diet, Country</td>
+                                <td>Categorical</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#f39c12"><strong>Stress Level</strong></td>
+                                <td style="color:#f39c12"><strong>TARGET</strong></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <p style="font-size:0.65em;color:#e74c3c">⚠ 595 NaN in Mental Health Condition → filled with 'None' (healthy people)</p>
+                    </div>
+                    <div>
+                        <h3>EDA → Decisions</h3>
+                        <div class="box" style="font-size:0.65em;margin:6px 0">
+                            <strong>Sleep varies across stress levels</strong><br> → Engineered <code>sleep_debt</code> = max(0, 8 - sleep_hours)
+                        </div>
+                        <div class="box" style="font-size:0.65em;margin:6px 0">
+                            <strong>Work hours higher at High stress</strong><br> → Engineered <code>work_intensity</code> = hours / 40
+                        </div>
+                        <div class="box" style="font-size:0.65em;margin:6px 0">
+                            <strong>Screen time > 6h linked to High stress</strong><br> → Engineered binary <code>screen_overload</code> flag
+                        </div>
+                        <div class="box" style="font-size:0.65em;margin:6px 0">
+                            <strong>Classes are balanced (~1000 each)</strong><br> → Metric: <strong>F1 Macro</strong> (weights all classes equally)
+                        </div>
+                        <div class="box" style="font-size:0.65em;margin:6px 0">
+                            <strong>Features low-correlated</strong><br> → Keep all features — no redundancy
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 4: MODELS                                         -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Models: Baseline → Improvement</h2>
+                <div class="grid2">
+                    <div>
+                        <div class="box">
+                            <h3>Baseline: Decision Tree</h3>
+                            <p>Single tree, max_depth=5. Simple, visualisable, but high variance — one bad split corrupts everything below it.</p>
+                            <div style="text-align:center;margin-top:10px">
+                                <div class="metric-big">0.2819</div>
+                                <div class="metric-label">F1 Macro</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="box box-green">
+                            <h3>Improvement: XGBoost + Optuna</h3>
+                            <p>300 trees built sequentially. Each tree corrects the mistakes of the previous one (boosting).</p>
+                            <p>Optuna ran <strong>50 trials</strong> to find best hyperparameters.</p>
+                            <div style="text-align:center;margin-top:10px">
+                                <div class="metric-big" style="color:#2ecc71">0.3669</div>
+                                <div class="metric-label">F1 Macro (confirmed by 5-fold CV)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="box box-blue" style="text-align:center">
+                    <span style="font-size:0.75em">Best hyperparameters found by Optuna: &nbsp;
+      <code>learning_rate = 0.016</code> &nbsp;
+      <code>n_estimators = 235</code> &nbsp;
+      <code>max_depth = 5</code>
+    </span>
+                </div>
+                <p style="font-size:0.6em;color:#aaa;text-align:center">Lower learning rate = more careful correction per tree. MLflow tracked every trial.</p>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 5: SHAP                                           -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>SHAP: Why Did the Model Predict This?</h2>
+                <div class="grid2" style="margin-top:10px">
+                    <div class="box">
+                        <h3>What is SHAP?</h3>
+                        <p>Tells us <strong>which features pushed the prediction</strong> and by how much. Not just WHAT — but WHY.</p>
+                    </div>
+                    <div class="box box-green">
+                        <h3>Example: 4h sleep, 60h work, no exercise</h3>
+                        <table style="margin-top:4px">
+                            <tr>
+                                <th>Class</th>
+                                <th>Probability</th>
+                            </tr>
+                            <tr>
+                                <td>Low</td>
+                                <td>12%</td>
+                            </tr>
+                            <tr>
+                                <td>Moderate</td>
+                                <td>23%</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#e74c3c"><strong>High</strong></td>
+                                <td style="color:#e74c3c"><strong>65%</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box box-blue">
+                        <h3>Top Drivers for High Stress</h3>
+                        <ul>
+                            <li>🔴 High <code>sleep_debt</code> → toward High stress</li>
+                            <li>🔴 High <code>work_intensity</code> → toward High stress</li>
+                            <li>🔴 <code>screen_overload</code> → toward High stress</li>
+                            <li>🟢 High <code>happiness_score</code> → away from High</li>
+                            <li>🟢 High <code>exercise</code> → away from High</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <h3>Why This Matters</h3>
+                        <p>A model you can't explain is hard to trust. SHAP lets us say: <em>"Change your sleep and screen habits to reduce stress risk."</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 6: MLOPS                                          -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>MLOps Pipeline</h2>
+                <div class="grid3">
+                    <div class="box">
+                        <h3>⚙️ Modular Code</h3>
+                        <ul style="font-size:0.65em">
+                            <li><code>src/data.py</code> — load & clean</li>
+                            <li><code>src/features.py</code> — engineering</li>
+                            <li><code>src/train.py</code> — training</li>
+                            <li><code>src/evaluate.py</code> — metrics</li>
+                            <li><code>config.yaml</code> — all params</li>
+                        </ul>
+                    </div>
+                    <div class="box box-blue">
+                        <h3>📊 MLflow</h3>
+                        <p style="font-size:0.65em">Tracks every Optuna trial — parameters, metrics, artifacts.</p>
+                        <p style="font-size:0.65em">View at: <code>mlflow ui</code></p>
+                        <p style="font-size:0.65em">50 runs logged with val F1 Macro per trial.</p>
+                    </div>
+                    <div class="box box-green">
+                        <h3>📦 DVC</h3>
+                        <p style="font-size:0.65em">Data and model versioned — not committed to git.</p>
+                        <p style="font-size:0.65em">Remote: Google Drive</p>
+                        <p style="font-size:0.65em">Reproduce with: <code>dvc pull</code></p>
+                    </div>
+                </div>
+                <br>
+                <div class="box" style="text-align:center">
+                    <p style="font-size:0.7em">
+                        <strong>Full reproduction:</strong> &nbsp;
+                        <code>git clone</code> → <code>pip install -r requirements.txt</code> → <code>dvc pull</code> → <code>python src/train.py</code>
+                    </p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 7: PRODUCTION + DEMO                              -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Production & Live Demo</h2>
+                <div class="grid2">
+                    <div>
+                        <div class="box">
+                            <h3>How it works in production</h3>
+                            <p style="font-size:0.7em"><strong>Real-time:</strong> FastAPI endpoint — HR system or mobile app sends lifestyle data, gets prediction back in milliseconds.</p>
+                            <p style="font-size:0.7em"><strong>Batch:</strong> Run predictions nightly on all users, flag anyone moving toward High stress.</p>
+                        </div>
+                        <div class="box box-blue">
+                            <h3>What to monitor</h3>
+                            <ul style="font-size:0.65em">
+                                <li><strong>Prediction drift</strong> — if 80% suddenly predict High, something changed</li>
+                                <li><strong>Data drift</strong> — average sleep hours dropping in new data</li>
+                                <li><strong>Model decay</strong> — F1 dropping over time as habits change</li>
+                            </ul>
+                            <p style="font-size:0.6em;color:#aaa">Tools: Evidently AI, MLflow monitoring</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="box box-green">
+                            <h3>🚀 Live Demo</h3>
+                            <p style="font-size:0.7em">API running at: <code>localhost:8000/docs</code></p>
+                            <br>
+                            <p style="font-size:0.65em"><strong>Request:</strong></p>
+                            <pre style="font-size:0.55em;background:rgba(0,0,0,0.3);padding:8px;border-radius:4px">{
+  "sleep_hours": 4.0,
+  "work_hours_per_week": 60,
+  "exercise_level": "Low",
+  "screen_time_hours": 7.5,
+  "happiness_score": 3.0,
+  ...
+}</pre>
+                            <p style="font-size:0.65em"><strong>Response:</strong></p>
+                            <pre style="font-size:0.55em;background:rgba(0,0,0,0.3);padding:8px;border-radius:4px">{
+  "predicted_stress_level": "High",
+  "probabilities": {
+    "Low": 0.12,
+    "Moderate": 0.23,
+    "High": 0.65
+  }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <!-- SLIDE 8: SUMMARY                                        -->
+            <!-- ═══════════════════════════════════════════════════════ -->
+            <section>
+                <h2>Summary</h2>
+                <div class="grid2">
+                    <div>
+                        <div class="box">
+                            <h3>What I built</h3>
+                            <ul style="font-size:0.7em">
+                                <li>✅ EDA notebook with documented decisions</li>
+                                <li>✅ Decision Tree baseline → XGBoost improvement</li>
+                                <li>✅ Optuna tuning: F1 0.28 → 0.37</li>
+                                <li>✅ SHAP explainability</li>
+                                <li>✅ MLflow + DVC + modular code</li>
+                                <li>✅ FastAPI serving endpoint</li>
+                            </ul>
+                        </div>
+                        <div class="box box-blue">
+                            <h3>Honest takeaway</h3>
+                            <p style="font-size:0.68em">F1 of 0.37 is modest — lifestyle features alone are a weak signal for stress. But the pipeline is production-ready and SHAP confirms the model learns real patterns, not noise.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="box box-green">
+                            <h3>Final Metrics</h3>
+                            <table>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>F1 Macro</th>
+                                </tr>
+                                <tr>
+                                    <td>Decision Tree</td>
+                                    <td>0.2819</td>
+                                </tr>
+                                <tr>
+                                    <td>XGBoost default</td>
+                                    <td>0.3411</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>XGBoost + Optuna</strong></td>
+                                    <td style="color:#2ecc71"><strong>0.3669</strong></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <p style="font-size:0.65em;color:#aaa">5-Fold CV: 0.3474 ± 0.017 — improvement confirmed</p>
+                        </div>
+                        <div class="box">
+                            <h3>GitHub</h3>
+                            <p style="font-size:0.7em">github.com/Dishantpaudel/burnout_predictor</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'fast',
+            controls: true,
+            progress: true,
+            slideNumber: true,
+            width: 1280,
+            height: 720,
+            margin: 0.02,
+            minScale: 0.2,
+            maxScale: 2.0,
+        });
+    </script>
+</body>
+
+</html>
