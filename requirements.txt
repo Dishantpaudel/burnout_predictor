@@ -1,0 +1,34 @@
+# Core data & ML
+pandas
+numpy
+scikit-learn
+xgboost
+
+# Hyperparameter tuning
+optuna
+
+# Experiment tracking
+mlflow
+
+# Explainability
+shap
+
+# Visualisation
+matplotlib
+seaborn
+
+# Serving
+fastapi
+uvicorn[standard]
+pydantic
+
+# MLOps
+dvc[gdrive]
+pyyaml
+
+# Model persistence
+joblib
+
+# Notebook
+notebook
+ipykernel

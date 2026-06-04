@@ -1,0 +1,24 @@
+# MLflow — never commit experiment runs
+mlruns/
+
+# DVC — only commit .dvc pointer files, not actual data/models
+data/raw/
+data/processed/
+app/model/
+*.pkl
+*.joblib
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
