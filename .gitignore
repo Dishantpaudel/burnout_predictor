@@ -1,10 +1,14 @@
 # MLflow — never commit experiment runs
 mlruns/
 
-# DVC — only commit .dvc pointer files, not actual data/models
-data/raw/
+# DVC — ignore actual data/models but ALLOW .dvc pointer files
+data/raw/*
+!data/raw/*.dvc
+!data/raw/.gitignore
 data/processed/
-app/model/
+app/model/*
+!app/model/*.dvc
+!app/model/.gitignore
 *.pkl
 *.joblib
 
@@ -22,3 +26,17 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Internal planning docs
+PROJECT_PLAN.md
+ROADMAP.md
+
+# MLflow database
+mlflow.db
+
+# Utility scripts
+scripts/
+
+# Old files
+app/predict.py
+src/preprocess.py
